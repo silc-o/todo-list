@@ -1,4 +1,5 @@
 import Project from "./Project";
+import { saveProjects } from "./StorageManager";
 
 let projects = [];
 let activeProject = null;
@@ -8,44 +9,50 @@ export function getActiveProject() {
 }
 
 export function setActiveProject(projectId) {
-  const index = projects.findIndex(project => project.id === projectId);
+  const index = getProject(projectId);
   activeProject = projects[index];
+  saveProjects(projects);
 }
 
-export function getProjects() {
+export function getAllProjects() {
   return projects;
+}
+
+export function getProject(projectId) {
+  return projects.findIndex(project => project.id === projectId);
 }
 
 export function addProject(name) {
   const newProject = new Project(name);
   projects.push(newProject);
   
-  if (!activeProject) {
-    activeProject = newProject;
-  }
-
-  return newProject;
+  saveProjects(projects);
 }
 
 export function deleteProject(projectId) {
   projects = projects.filter(project => project.id !== projectId);
-  
-  if (activeProject && activeProject.id === projectId) {
-    activeProject = projects[0] || null;
-  }
+  saveProjects(projects)
 }
 
-export function addTodoToActiveProject(todo) {
-  if (activeProject) {
-    activeProject.addTodo(todo);
-  }
+export function addTodo(projectId, todoData) {
+  const project = getProjectById(projectId);
+  const todo = new Todo(...todoData);
+  project.addTodo(todo);
+  saveProjects(projects);
 }
 
-export function deleteTodofromActiveProject(todoId) {
-  if (activeProject) {
-    activeProject.removeTodo(todoId);
-  }
+export function deleteTodo(projectId, todoId) {
+  const project = getProjectById(projectId);
+  project.removeTodo(todoId);
+  saveProjects(projects);
 }
+
+export function toggleTodo(projectId, todoId) {
+  const project = getProjectById(projectId)
+  project.toggleTodo(todoId);
+  saveProjects(projects);
+}
+
 
 
 

@@ -1,4 +1,4 @@
-class Todo {
+export default class Todo {
   constructor(name, description, dueDate, priority = 'low', notes) {
     this.id = crypto.randomUUID();
     this.description = description;

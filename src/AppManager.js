@@ -48,11 +48,11 @@ export function deleteTodo(projectId, todoId) {
 }
 
 export function toggleTodo(projectId, todoId) {
-  const todo = getTodo(todoId);
-  todo.toggleComplete;
+  const project = getProjectById(projectId);
+  const todo = project.getTodoById(todoId);
+  todo.toggleComplete();
   saveProjects(projects);
 }
-
 
 
 

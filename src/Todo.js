@@ -1,6 +1,7 @@
 export default class Todo {
-  constructor({ name, description, dueDate, priority = 'low', notes = '', isComplete = false, id = crypto.randomUUID() }) {
+  constructor({ title, description, dueDate, priority = 'low', notes = '', isComplete = false, id = crypto.randomUUID() }) {
     this.id = id;
+    this.title.title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;

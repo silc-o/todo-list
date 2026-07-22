@@ -1,4 +1,5 @@
 import Project from "./Project";
+import Todo from "./Todo";
 import { saveProjects } from "./StorageManager";
 
 let projects = [];
@@ -47,8 +48,8 @@ export function deleteTodo(projectId, todoId) {
 }
 
 export function toggleTodo(projectId, todoId) {
-  const project = getProjectById(projectId)
-  project.toggleTodo(todoId);
+  const todo = getTodo(todoId);
+  todo.toggleComplete;
   saveProjects(projects);
 }
 

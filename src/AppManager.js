@@ -9,8 +9,7 @@ export function getActiveProject() {
 }
 
 export function setActiveProject(projectId) {
-  const index = getProject(projectId);
-  activeProject = projects[index];
+  activeProject = getProjectById(projectId);
   saveProjects(projects);
 }
 
@@ -18,8 +17,8 @@ export function getAllProjects() {
   return projects;
 }
 
-export function getProject(projectId) {
-  return projects.findIndex(project => project.id === projectId);
+export function getProjectById(projectId) {
+  return projects.find(project => project.id === projectId);
 }
 
 export function addProject(name) {

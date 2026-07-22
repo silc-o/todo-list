@@ -36,7 +36,7 @@ export function deleteProject(projectId) {
 
 export function addTodo(projectId, todoData) {
   const project = getProjectById(projectId);
-  const todo = new Todo(...todoData);
+  const todo = new Todo(todoData);
   project.addTodo(todo);
   saveProjects(projects);
 }

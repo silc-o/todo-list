@@ -9,6 +9,10 @@ export default class Project {
     return [...this.todos];
   }
 
+  getTodoById(todoId) {
+    return this.todos.find(todo => todo.id === todoId) || null;
+  }
+
   addTodo(todo) {
     this.todos.push(todo);
   }

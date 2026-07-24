@@ -69,6 +69,7 @@ main {
 
 #content {
   margin-top: 15px;
+  /* text-align: center; */
 }
 
 .todo-card {
@@ -102,6 +103,10 @@ main {
 .toggle-btn.complete {
   background: green;
   border-color: green;
+}
+
+.no-task {
+  text-align: center;
 }
 
 

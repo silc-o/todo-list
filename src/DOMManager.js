@@ -59,3 +59,7 @@ export function noTaskOutput() {
   noTask.textContent = 'Yay, No Tasks!';
   content.appendChild(noTask);
 }
+
+export function clearContent() {
+  content.innerHTML = "";
+} 

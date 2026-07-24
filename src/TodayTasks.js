@@ -1,11 +1,10 @@
 import { getAllTodos } from "./AppManager";
-import { createTaskCard, updateSectionTitle, noTaskOutput } from "./DOMManager";
+import { createTaskCard, updateSectionTitle, noTaskOutput, clearContent } from "./DOMManager";
 import { sortTodosByPriority } from "./helpers";
 
 export function loadTodayTasks() {
+  clearContent();
   const todayString = new Date().toISOString().split('T')[0];
-  const content = document.querySelector('#content')
-  content.innerHTML = "";
   
   updateSectionTitle("Tasks Today");
   

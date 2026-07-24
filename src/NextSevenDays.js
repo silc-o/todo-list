@@ -1,5 +1,5 @@
 import { getAllTodos } from "./AppManager";
-import { createTaskCard, updateSectionTitle, noTaskOutput } from "./DOMManager";
+import { createTaskCard, updateSectionTitle, noTaskOutput, clearContent } from "./DOMManager";
 import { sortTodosByPriority } from "./helpers";
 
 function getLocalDate(offsetDays = 0) {
@@ -14,9 +14,7 @@ function getLocalDate(offsetDays = 0) {
 }
 
 export function loadNext7DaysTasks() {
-  const content = document.querySelector('#content')
-  content.innerHTML = "";
-
+  clearContent();
   updateSectionTitle("Next 7 Days Tasks");
 
   const today = getLocalDate(0);

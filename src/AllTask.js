@@ -1,11 +1,10 @@
 import { getAllTodos } from "./AppManager.js";
-import { createTaskCard, updateSectionTitle, noTaskOutput } from "./DOMManager";
+import { createTaskCard, updateSectionTitle, noTaskOutput, clearContent } from "./DOMManager";
 import { sortTodosByPriority } from "./helpers.js";
 
 export function loadAllTask() {
+  clearContent();
   updateSectionTitle("All Tasks");
-  const content = document.querySelector('#content')
-  content.innerHTML = "";
 
   const todos = getAllTodos();
 

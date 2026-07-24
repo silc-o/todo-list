@@ -54,6 +54,10 @@ export function toggleTodo(projectId, todoId) {
   saveProjects(projects);
 }
 
+export function getAllTodos() {
+  return projects.flatMap(project => project.getTodos());
+}
+
 
 
 

@@ -7,6 +7,7 @@ function createTask(todo) {
   todoCard.classList.add('todo-card')
 
   const todoCardLeft = document.createElement('div');
+  todoCardLeft.classList.add('todo-left');
   const toggleBtn = document.createElement('button');
   toggleBtn.classList.add('toggle-btn');
   toggleBtn.setAttribute('aria-label', 'Mark as complete');
@@ -27,6 +28,7 @@ function createTask(todo) {
   todoCardLeft.appendChild(titleContainer);
 
   const todoCardRight = document.createElement('div');
+  todoCardRight.classList.add('todo-right');
   const dateTime = document.createElement('time');
   dateTime.textContent = todo.dueDate;
 
@@ -45,7 +47,7 @@ function createTask(todo) {
   todoCard.appendChild(todoCardLeft);
   todoCard.appendChild(todoCardRight);
 
-  content.appendChild.todoCard;
+  content.appendChild(todoCard);
 }
 
 export function loadAllTask() {
@@ -54,8 +56,5 @@ export function loadAllTask() {
 
   const todos = getAllTodos();
 
-  for (let i = 1; 1 < todos.length(); i++) {
-
-  }
-
+  todos.forEach(todo => createTask(todo));
 }

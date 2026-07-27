@@ -2,7 +2,7 @@ import { getAllTodos } from "./AppManager.js";
 import { createTaskCard, updateSectionTitle, noTaskOutput, clearContent } from "./DOMManager";
 import { sortTodosByPriority } from "./helpers.js";
 
-export function loadAllTask() {
+export function loadAllTasks() {
   clearContent();
   updateSectionTitle("All Tasks");
 

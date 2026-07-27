@@ -1,4 +1,5 @@
 import Todo from "./Todo";
+import Project from "./Project";
 
 const TODO_PROJECTS_KEY = 'todo_app_projects';
 
@@ -21,7 +22,7 @@ export function loadProjects() {
     
     return data.map(obj => {
       const todos = obj.todos.map(todoObj => {
-        return new Todo(todoObj.name, todoObj.description, todoObj.dueDate, todoObj.priority, todoObj.notes, todoObj.id)
+        return new Todo(todoObj.title, todoObj.description, todoObj.dueDate, todoObj.priority, todoObj.notes, todoObj.id)
       });
       
       return new Project(obj.name, todos);

@@ -1,7 +1,7 @@
 import { getAllProjects } from "./AppManager";
 import { createProjectList } from "./DOMManager";
 
-export function renderProjects() {
+export function renderProjectList() {
   const projectList = document.querySelector('#nav-projects ul');
   projectList.innerHTML = "";
 

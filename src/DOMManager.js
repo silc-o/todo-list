@@ -63,3 +63,24 @@ export function noTaskOutput() {
 export function clearContent() {
   content.innerHTML = "";
 } 
+
+export function createProjectList(projectArray) {
+  const projectList = document.querySelector('#nav-projects ul');
+  
+  projectArray.forEach(project => {
+    const projectItem = document.createElement('li');
+    projectItem.classList.add('project-item');
+
+    const projectName = document.createElement('span');
+    projectName.classList.add('project-name');
+    projectName.textContent = project.name;
+
+    const projectMenuBtn = document.createElement('button');
+    projectMenuBtn.classList.add('project-menu-btn');
+    projectMenuBtn.setAttribute('aria-label', 'Project options');
+
+    projectItem.appendChild(projectName);
+    projectItem.appendChild(projectMenuBtn);
+    projectList.appendChild(projectItem);
+  })
+}

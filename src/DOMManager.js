@@ -1,3 +1,6 @@
+import { getActiveProject, getAllTodos, getAllProjects } from "./AppManager";
+import { sortTodosByPriority, getLocalDate } from "./helpers";
+
 const content = document.querySelector('#content');
 
 export function createTaskCard(todo) {
@@ -83,4 +86,63 @@ export function createProjectList(projectArray) {
     projectItem.appendChild(projectMenuBtn);
     projectList.appendChild(projectItem);
   })
+}
+
+export function renderAllTasks() {
+  clearContent();
+  updateSectionTitle("All Tasks");
+
+  const todos = getAllTodos();
+
+  if (todos.length !== 0) {
+    sortTodosByPriority(todos);
+    todos.forEach(todo => createTaskCard(todo));
+  } else {
+    noTaskOutput();
+  }
+}
+
+export function renderNext7DaysTasks() {
+  clearContent();
+  updateSectionTitle("Next 7 Days Tasks");
+
+  const today = getLocalDate(0);
+  const nextWeek = getLocalDate(7);
+
+  const upcomingTodos = getAllTodos().filter(todo => {
+    return todo.dueDate >= today && todo.dueDate <= nextWeek;
+  });
+
+  if (upcomingTodos.length !== 0) {
+    sortTodosByPriority(upcomingTodos);
+    upcomingTodos.forEach(todo => createTaskCard(todo));
+  } else {
+    noTaskOutput();
+  }
+}
+
+export function renderTodayTasks() {
+  clearContent();
+  const todayString = new Date().toISOString().split('T')[0];
+  
+  updateSectionTitle("Tasks Today");
+  
+  const todos = getAllTodos();
+  const todayTodos = todos.filter(todo => todo.dueDate === todayString);
+  
+  if (todayTodos.length !== 0) {
+    sortTodosByPriority(todayTodos);
+    todayTodos.forEach(todo => createTaskCard(todo));
+  } else {
+    noTaskOutput();
+  }
+}
+
+export function renderProjectList() {
+  const projectList = document.querySelector('#nav-projects ul');
+  projectList.innerHTML = "";
+
+  const projects = getAllProjects();
+
+  createProjectList(projects);
 }

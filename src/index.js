@@ -1,10 +1,7 @@
 import "./styles.css";
-import { loadAllTask } from "./AllTask.js";
-
 import { addProject, getAllProjects, setActiveProject, getActiveProject, addTodo, toggleTodo, deleteTodo, deleteProject } from "./AppManager.js";
 import { loadProjects } from "./StorageManager.js";
-import { loadTodayTasks } from "./TodayTasks.js";
-import { loadNext7DaysTasks } from "./NextSevenDays.js";
+import { renderAllTasks, renderNext7DaysTasks, renderProjectList, renderTodayTasks} from "./DOMManager.js";
 
 // // test creating projects
 // addProject("Work");
@@ -48,8 +45,18 @@ import { loadNext7DaysTasks } from "./NextSevenDays.js";
 // const loaded = loadProjects();
 // console.log("Loaded from storage:", loaded);
 
-loadAllTask();
+renderAllTasks();
+renderProjectList();
 
-document.querySelector('#all-task').addEventListener('click', loadAllTask);
-document.querySelector('#today-task').addEventListener('click', loadTodayTasks);
-document.querySelector('#sevenD-task').addEventListener('click', loadNext7DaysTasks )
+document.querySelector('#nav-home ul').addEventListener('click', (event) => {
+  if (event.target.id === 'all-task') renderAllTasks();
+  if (event.target.id === 'today-task') renderTodayTasks();
+  if (event.target.id === 'sevenD-task') renderNext7DaysTasks();
+});
+
+document.querySelector('#nav-projects ul').addEventListener('click', (event) => {
+  const li = event.target.closest('li');
+  const projectId = li.dataset.id;
+  setActiveProject(projectId);
+  renderProjectList();
+});

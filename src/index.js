@@ -1,7 +1,7 @@
 import "./styles.css";
 import { addProject, getAllProjects, setActiveProject, getActiveProject, addTodo, toggleTodo, deleteTodo, deleteProject } from "./AppManager.js";
 import { loadProjects } from "./StorageManager.js";
-import { renderAllTasks, renderNext7DaysTasks, renderProjectList, renderTodayTasks} from "./DOMManager.js";
+import { renderAllTasks, renderNext7DaysTasks, renderProjectList, renderTodayTasks, renderActiveProject } from "./DOMManager.js";
 
 // // test creating projects
 // addProject("Work");
@@ -56,7 +56,6 @@ document.querySelector('#nav-home ul').addEventListener('click', (event) => {
 
 document.querySelector('#nav-projects ul').addEventListener('click', (event) => {
   const li = event.target.closest('li');
-  const projectId = li.dataset.id;
-  setActiveProject(projectId);
-  renderProjectList();
+  setActiveProject(li.dataset.id);  
+  renderActiveProject();
 });

@@ -144,3 +144,5 @@ vite.config.ts.timestamp-*
 
 # Todo file
 todo.md
+
+.vscode

@@ -20,12 +20,9 @@ export function loadProjects() {
     
     const data = JSON.parse(jsonString);
     
-    return data.map(obj => {
-      const todos = obj.todos.map(todoObj => {
-        return new Todo(todoObj.title, todoObj.description, todoObj.dueDate, todoObj.priority, todoObj.id)
-      });
-      
-      return new Project(obj.name, todos);
+  return data.map(obj => {
+      const todos = obj.todos.map(todoObj => new Todo(todoObj)); // just pass the whole object
+      return new Project(obj.name, todos, obj.id); // also preserve project id
     });
     
   } catch (error) {

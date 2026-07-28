@@ -6,6 +6,7 @@ const content = document.querySelector('#content');
 export function createTaskCard(todo) {
   const todoCard = document.createElement('div')
   todoCard.classList.add('todo-card')
+  todoCard.dataset.id = todo.id;
 
   const todoCardLeft = document.createElement('div');
   todoCardLeft.classList.add('todo-left');

@@ -1,7 +1,7 @@
 export default class Project {
-  constructor (name, todos = []) {
+  constructor (title, todos = []) {
     this.id = crypto.randomUUID();
-    this.name = name;
+    this.title = title;
     this.todos = todos;
   }
 

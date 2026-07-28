@@ -72,11 +72,12 @@ export function createProjectList(projectArray) {
   
   projectArray.forEach(project => {
     const projectItem = document.createElement('li');
+    projectItem.dataset.id = project.id;
     projectItem.classList.add('project-item');
 
     const projectName = document.createElement('span');
     projectName.classList.add('project-name');
-    projectName.textContent = project.name;
+    projectName.textContent = project.title;
 
     const projectMenuBtn = document.createElement('button');
     projectMenuBtn.classList.add('project-menu-btn');
@@ -145,4 +146,19 @@ export function renderProjectList() {
   const projects = getAllProjects();
 
   createProjectList(projects);
+}
+
+
+export function renderActiveProject() {
+  const activeProject = getActiveProject();
+  clearContent();
+  updateSectionTitle(`'${activeProject.title}'`);
+
+  const todos = activeProject.getTodos();
+  if (todos.length !== 0) {
+    sortTodosByPriority(todos);
+    todos.forEach(todo => createTaskCard(todo));
+  } else {
+    noTaskOutput();
+  }
 }

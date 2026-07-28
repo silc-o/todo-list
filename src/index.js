@@ -19,7 +19,6 @@ import { renderAllTasks, renderNext7DaysTasks, renderProjectList, renderTodayTas
 //   description: "Q4 report",
 //   dueDate: "2024-01-15",
 //   priority: "high",
-//   notes: "Include Q3 comparison"
 // });
 
 // addTodo(workProject.id, {
@@ -27,7 +26,6 @@ import { renderAllTasks, renderNext7DaysTasks, renderProjectList, renderTodayTas
 //   description: "To manager",
 //   dueDate: "2024-01-10",
 //   priority: "low",
-//   notes: ""
 // });
 
 // console.log("Work todos:", workProject.getTodos());
@@ -73,5 +71,60 @@ closeBtn.addEventListener('click', () => {
   todoModal.close();
 })
 
-modal.showModal();
-modal.close();
+const titleInput = document.querySelector('#todo-title');
+const descriptionInput = document.querySelector('#todo-description');
+const DueInput = document.querySelector('#todo-due-date');
+const priorityInput = document.querySelector('#todo-priority');
+
+let currentTodoId = null;
+
+const todoContainer = document.querySelector('#content');
+
+todoForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  if (currentTodoId === null) {
+    addTodo({
+      title: titleInput.value,
+      description: descriptionInput.value,
+      dueDate: DueInput.value,
+      priority: priorityInput.value,
+    });
+  } else {
+    const project = getActiveProject();
+    const todo = project.find(todo => todo.id === currentTodoId);
+    todo.title = titleInput.value;
+    todo.description = descriptionInput.value;
+    todo.dueDate = DueInput.value;
+    todo.priorityInput = priorityInput.value;
+
+    currentTodoId = null;
+  }
+
+  renderActiveProject();
+  dialog.close();
+})
+
+todoContainer.addEventListener('click', (e) => {
+  if (event.target.classList.contains('delete')) {
+    const card = event.target.closest('.todo-card');
+    const todoId = card.dataset.id;
+    deleteTodo(todoId);
+    renderActiveProject();
+  }
+
+  if (event.target.classList.contains('edit')) {
+    const project = getActiveProject();
+    const card = event.target.closest('.todo-card');
+    const todoId = card.dataset.id;
+    const todo = project.find(todo => todo.id === todoId);
+
+    titleInput.value = todo.title;
+    descriptionInput.value = todo.description;
+    DueInput.value = todo.dueDate;
+    priorityInput.value = todo.priorityInput;
+
+    currentTodoId = todoId
+    todoModal.showModal();
+  }
+})

@@ -90,6 +90,8 @@ export function createProjectList(projectArray) {
 }
 
 export function renderAllTasks() {
+  hideAddTodoBtn();
+
   clearContent();
   updateSectionTitle("All Tasks");
 
@@ -104,6 +106,8 @@ export function renderAllTasks() {
 }
 
 export function renderNext7DaysTasks() {
+  hideAddTodoBtn();
+
   clearContent();
   updateSectionTitle("Next 7 Days Tasks");
 
@@ -123,6 +127,8 @@ export function renderNext7DaysTasks() {
 }
 
 export function renderTodayTasks() {
+  hideAddTodoBtn();
+
   clearContent();
   const todayString = new Date().toISOString().split('T')[0];
   
@@ -150,6 +156,8 @@ export function renderProjectList() {
 
 
 export function renderActiveProject() {
+  showAddTodoBtn();
+
   const activeProject = getActiveProject();
   clearContent();
   updateSectionTitle(`'${activeProject.title}'`);
@@ -161,4 +169,12 @@ export function renderActiveProject() {
   } else {
     noTaskOutput();
   }
+}
+
+function hideAddTodoBtn() {
+  document.querySelector('#add-todo-btn').classList.add('hidden');
+}
+
+function showAddTodoBtn() {
+  document.querySelector('#add-todo-btn').classList.remove('hidden');
 }

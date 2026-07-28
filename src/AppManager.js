@@ -1,8 +1,8 @@
 import Project from "./Project";
 import Todo from "./Todo";
-import { saveProjects } from "./StorageManager";
+import { saveProjects, loadProjects } from "./StorageManager";
 
-let projects = [];
+let projects = loadProjects();
 let activeProject = null;
 
 export function getActiveProject() {

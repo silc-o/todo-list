@@ -161,7 +161,7 @@ export function renderActiveProject() {
 
   const activeProject = getActiveProject();
   clearContent();
-  updateSectionTitle(`'${activeProject.title}'`);
+  updateSectionTitle(activeProject.title);
 
   const todos = activeProject.getTodos();
   if (todos.length !== 0) {

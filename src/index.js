@@ -10,6 +10,7 @@ console.log("All projects:", getAllProjects());
 
 renderAllTasks();
 renderProjectList();
+loadProjects();
 
 document.querySelector('#nav-home ul').addEventListener('click', (event) => {
   if (event.target.id === 'all-task') renderAllTasks();
@@ -19,7 +20,11 @@ document.querySelector('#nav-home ul').addEventListener('click', (event) => {
 
 document.querySelector('#nav-projects ul').addEventListener('click', (event) => {
   const li = event.target.closest('li');
-  setActiveProject(li.dataset.id);  
+  
+  if (!li) return;
+  
+  const projectId = li.dataset.id;
+  setActiveProject(projectId);
   renderActiveProject();
 });
 

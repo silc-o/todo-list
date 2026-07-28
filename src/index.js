@@ -59,3 +59,19 @@ document.querySelector('#nav-projects ul').addEventListener('click', (event) => 
   setActiveProject(li.dataset.id);  
   renderActiveProject();
 });
+
+const todoModal = document.querySelector('#todo-modal');
+const addTodoBtn = document.querySelector('#add-todo-btn');
+const closeBtn = document.querySelector('#close-todo-dialog');
+const todoForm = document.querySelector('#todo-form');
+
+addTodoBtn.addEventListener('click', () => {
+  todoModal.showModal();
+})
+
+closeBtn.addEventListener('click', () => {
+  todoModal.close();
+})
+
+modal.showModal();
+modal.close();

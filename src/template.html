@@ -7,6 +7,36 @@
 </head>
 <body>
 
+  <dialog id="todo-modal">
+    <form id="todo-form">
+      <h2>New Todo</h2>
+
+      <label for="todo-title">Title</label>
+      <input type="text" id="todo-title" required>
+
+      <label for="todo-description">Description</label>
+      <textarea id="todo-description"></textarea>
+
+      <label for="todo-due-date">Due Date</label>
+      <input type="date" id="todo-due-date">
+
+      <label for="todo-priority">Priority</label>
+      <select id="todo-priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+
+      <label for="todo-notes">Notes</label>
+      <textarea id="todo-notes"></textarea>
+
+      <div class="dialog-buttons">
+        <button type="submit">Add Todo</button>
+        <button type="button" id="close-todo-dialog">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
   <header>
     <p>Todo</p>
   </header>
@@ -42,7 +72,7 @@
 
       <div id="content"></div>
 
-      </div>
+      <button id="add-todo-btn" aria-label="Add new todo">+</button>
     </main>
 
   </div>

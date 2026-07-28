@@ -43,7 +43,10 @@ export function addTodo(todoData) {
 
 export function deleteTodo(todoId) {
   const project = getActiveProject();
-  project.removeTodo(todoId);
+
+  if (!project) return;
+
+  project.todos = project.todos.filter(todo => todo.id !== todoId);
   saveProjects(projects);
 }
 

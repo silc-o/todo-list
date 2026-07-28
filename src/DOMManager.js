@@ -21,7 +21,7 @@ export function createTaskCard(todo) {
   todoTitle.textContent = todo.title;
 
   const todoNotes = document.createElement('div');
-  todoNotes.textContent = todo.notes;
+  todoNotes.textContent = todo.description;
   titleContainer.appendChild(todoTitle);
   titleContainer.appendChild(todoNotes);
 

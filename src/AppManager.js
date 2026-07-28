@@ -34,15 +34,15 @@ export function deleteProject(projectId) {
   saveProjects(projects)
 }
 
-export function addTodo(projectId, todoData) {
-  const project = getProjectById(projectId);
+export function addTodo(todoData) {
+  const project = getActiveProject();
   const todo = new Todo(todoData);
   project.addTodo(todo);
   saveProjects(projects);
 }
 
-export function deleteTodo(projectId, todoId) {
-  const project = getProjectById(projectId);
+export function deleteTodo(todoId) {
+  const project = getActiveProject();
   project.removeTodo(todoId);
   saveProjects(projects);
 }

@@ -91,7 +91,11 @@ export function createProjectList(projectArray) {
   })
 }
 
+let currentView = 'all-tasks';
+
 export function renderAllTasks() {
+  currentView = 'all-tasks';
+
   hideAddTodoBtn();
 
   clearContent();
@@ -108,6 +112,8 @@ export function renderAllTasks() {
 }
 
 export function renderNext7DaysTasks() {
+  currentView = 'seven-days';
+
   hideAddTodoBtn();
 
   clearContent();
@@ -129,6 +135,8 @@ export function renderNext7DaysTasks() {
 }
 
 export function renderTodayTasks() {
+  currentView = 'today';
+
   hideAddTodoBtn();
 
   clearContent();
@@ -158,9 +166,14 @@ export function renderProjectList() {
 
 
 export function renderActiveProject() {
+  currentView = 'project';
+
   showAddTodoBtn();
 
   const activeProject = getActiveProject();
+
+  if (!activeProject) return;
+
   clearContent();
   updateSectionTitle(activeProject.title);
 
@@ -170,6 +183,18 @@ export function renderActiveProject() {
     todos.forEach(todo => createTaskCard(todo));
   } else {
     noTaskOutput();
+  }
+}
+
+export function refreshCurrentView() {
+  if (currentView === 'project') {
+    renderActiveProject();
+  } else if (currentView === 'all-tasks') {
+    renderAllTasks();
+  } else if (currentView === 'today') {
+    renderTodayTasksToday();
+  } else if (currentView === 'seven-days') {
+    renderNext7DaysTasks();
   }
 }
 

@@ -42,7 +42,7 @@ export function addTodo(todoData) {
 }
 
 export function deleteTodo(todoId) {
-  const project = getActiveProject();
+  const project = findProjectByTodoId(todoId);
 
   if (!project) return;
 
@@ -59,6 +59,10 @@ export function toggleTodo(projectId, todoId) {
 
 export function getAllTodos() {
   return projects.flatMap(project => project.getTodos());
+}
+
+export function findProjectByTodoId(todoId) {
+  return getAllProjects().find(project => project.getTodoById(todoId));
 }
 
 

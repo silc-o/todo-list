@@ -1,7 +1,7 @@
 import "./styles.css";
-import { addProject, getAllProjects, setActiveProject, getActiveProject, addTodo, toggleTodo, deleteTodo, deleteProject } from "./AppManager.js";
-import { loadProjects } from "./StorageManager.js";
-import { renderAllTasks, renderNext7DaysTasks, renderProjectList, renderTodayTasks, renderActiveProject } from "./DOMManager.js";
+import { addProject, getAllProjects, setActiveProject, getActiveProject, addTodo, toggleTodo, deleteTodo, deleteProject, findProjectByTodoId } from "./AppManager.js";
+import { loadProjects, saveProjects } from "./StorageManager.js";
+import { renderAllTasks, renderNext7DaysTasks, renderProjectList, renderTodayTasks, renderActiveProject, refreshCurrentView } from "./DOMManager.js";
 
 // test creating projects
 addProject("Work");
@@ -53,16 +53,16 @@ const todoContainer = document.querySelector('#content');
 todoForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  if (currentTodoId === null) {
+  if (currentTodoId === null) { // submit
     addTodo({
       title: titleInput.value,
       description: descriptionInput.value,
       dueDate: DueInput.value,
       priority: priorityInput.value,
     });
-  } else {
-    const project = getActiveProject();
-    const todo = project.getTodoById(todoId);
+  } else { // edit
+    const project = findProjectByTodoId(currentTodoId);
+    const todo = project.getTodoById(currentTodoId);
     todo.title = titleInput.value;
     todo.description = descriptionInput.value;
     todo.dueDate = DueInput.value;
@@ -71,7 +71,8 @@ todoForm.addEventListener('submit', (event) => {
     currentTodoId = null;
   }
 
-  renderActiveProject();
+  saveProjects(getAllProjects());
+  refreshCurrentView(); // re-renders correct view
   todoModal.close();
 })
 
@@ -83,10 +84,12 @@ todoContainer.addEventListener('click', (event) => {
   }
 
   if (event.target.classList.contains('edit-btn')) {
-    const project = getActiveProject();
     const card = event.target.closest('.todo-card');
     const todoId = card.dataset.id;
-    const todo = project.find(todo => todo.id === todoId);
+    const project = findProjectByTodoId(todoId);
+    const todo = project.getTodoById(todoId);
+
+    if (!project) return;
 
     titleInput.value = todo.title;
     descriptionInput.value = todo.description;

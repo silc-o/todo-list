@@ -82,6 +82,7 @@ export function createProjectList(projectArray) {
 
     const projectMenuBtn = document.createElement('button');
     projectMenuBtn.classList.add('project-menu-btn');
+    projectMenuBtn.textContent = '⋮';
     projectMenuBtn.setAttribute('aria-label', 'Project options');
 
     projectItem.appendChild(projectName);

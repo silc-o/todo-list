@@ -3,11 +3,6 @@ import { addProject, getAllProjects, setActiveProject, getActiveProject, addTodo
 import { loadProjects, saveProjects } from "./StorageManager.js";
 import { renderAllTasks, renderNext7DaysTasks, renderProjectList, renderTodayTasks, renderActiveProject, refreshCurrentView } from "./DOMManager.js";
 
-// test creating projects
-addProject("Work");
-addProject("Personal");
-console.log("All projects:", getAllProjects());
-
 renderAllTasks();
 renderProjectList();
 loadProjects();
@@ -34,6 +29,8 @@ const closeBtn = document.querySelector('#close-todo-dialog');
 const todoForm = document.querySelector('#todo-form');
 
 addTodoBtn.addEventListener('click', () => {
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelector('#todo-due-date').min = today;
   todoModal.showModal();
 })
 
@@ -100,3 +97,24 @@ todoContainer.addEventListener('click', (event) => {
     todoModal.showModal();
   }
 })
+
+const projectDialog = document.querySelector('#project-dialog');
+const projectForm = document.querySelector('#project-form');
+const closeProjectDialog = document.querySelector('#close-project-dialog');
+
+document.querySelector('#add-project-btn').addEventListener('click', () => {
+  projectDialog.showModal();
+});
+
+closeProjectDialog.addEventListener('click', () => {
+  projectDialog.close();
+});
+
+projectForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.querySelector('#project-name-input').value;
+  addProject(name);
+  renderProjectList(); // update sidebar
+  console.log("projects after add:", getAllProjects());
+  projectDialog.close();
+});

@@ -22,7 +22,7 @@ export function loadProjects() {
     
   return data.map(obj => {
       const todos = obj.todos.map(todoObj => new Todo(todoObj)); // just pass the whole object
-      return new Project(obj.name, todos, obj.id); // also preserve project id
+      return new Project(obj.title, todos, obj.id); // also preserve project id
     });
     
   } catch (error) {

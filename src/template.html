@@ -34,13 +34,25 @@
     </form>
   </dialog>
 
+  <dialog id="project-dialog">
+    <form id="project-form">
+      <h2>New Project</h2>
+      <label for="project-name-input">Project Name</label>
+      <input type="text" id="project-name-input" placeholder="Enter project name" required>
+      <div class="dialog-buttons">
+        <button type="submit">Add</button>
+        <button type="button" id="close-project-dialog">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
   <header>
     <p>Todo</p>
   </header>
 
   <div id="app">
     <aside id="sidebar">
-      <div id="sidebar-title home">
+      <div id="sidebar-title-home">
         <p>Home</p>
       </div>
 
@@ -52,7 +64,7 @@
         </ul>
       </nav>
 
-      <div id="sidebar-title projects">
+      <div id="sidebar-title-projects">
         <p>Projects</p>
       </div>
 
@@ -61,7 +73,7 @@
         </ul>
       </nav>
 
-      <button id="add-project">Add Project</button>
+      <button id="add-project-btn">Add Project</button>
     </aside>
 
     <main>

@@ -31,6 +31,14 @@ export function createTaskCard(todo) {
 
   const todoCardRight = document.createElement('div');
   todoCardRight.classList.add('todo-right');
+
+  if (todo.priority) {
+    const priorityBadge = document.createElement('span');
+    priorityBadge.classList.add('priority-badge', `priority-${todo.priority.toLowerCase()}`);
+    priorityBadge.textContent = todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1);
+    todoCardRight.appendChild(priorityBadge);
+  }
+
   const dateTime = document.createElement('time');
   dateTime.textContent = todo.dueDate;
 
